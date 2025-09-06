@@ -10,6 +10,7 @@ import Projects from "./Dashboard/Projects";
 import Tasks from "./Dashboard/Tasks";
 import Team from "./Dashboard/Team";
 import Setting from "./Dashboard/Reports";
+import Notifications from "./Dashboard/Notifications";
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
             <Route path="tasks" element={<Tasks />} />
             <Route path="team" element={<Team />} />
             <Route path="Setting" element={<Setting />} />
+            <Route path="Notifications" element={<Notifications />} />
           </Route>
         </Routes>
       </div>

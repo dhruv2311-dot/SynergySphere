@@ -1,4 +1,4 @@
-import { Home, FolderKanban, CheckSquare, Users, BarChart2 } from "lucide-react";
+import { Home, FolderKanban, CheckSquare, Users, BarChart2, Bell } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
 export default function Sidebar() {
@@ -7,6 +7,7 @@ export default function Sidebar() {
     { to: "/projects", label: "Projects", icon: <FolderKanban size={18} /> },
     { to: "/tasks", label: "Tasks", icon: <CheckSquare size={18} /> },
     { to: "/team", label: "Team", icon: <Users size={18} /> },
+    { to: "/Notifications", label: "Notifications", icon: <Bell size={18} /> }, // 🔔 updated icon
     { to: "/Setting", label: "Setting", icon: <BarChart2 size={18} /> },
   ];
 
