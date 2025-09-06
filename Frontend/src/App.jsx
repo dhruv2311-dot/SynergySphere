@@ -3,18 +3,32 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
 import ForgotPassword from "./components/Auth/ForgotPassword";
-import Dashboard from "./Dashboard/dashboard";
 import Layout from "./Layout/layout";
+
+import Dashboard from "./Dashboard/dashboard";
+import Projects from "./Dashboard/Projects";
+import Tasks from "./Dashboard/Tasks";
+import Team from "./Dashboard/Team";
+import Setting from "./Dashboard/Reports";
+
 export default function App() {
   return (
     <Router>
       <div className="min-h-screen bg-gray-50 font-poppins">
         <Routes>
-          <Route path="/*" element={<Layout/>} />
+          {/* Auth routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+
+          {/* Protected / Main layout */}
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Dashboard />} />  {/* default "/" */}
+            <Route path="projects" element={<Projects />} />
+            <Route path="tasks" element={<Tasks />} />
+            <Route path="team" element={<Team />} />
+            <Route path="Setting" element={<Setting />} />
+          </Route>
         </Routes>
       </div>
     </Router>

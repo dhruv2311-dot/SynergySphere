@@ -7,7 +7,7 @@ export default function Sidebar() {
     { to: "/projects", label: "Projects", icon: <FolderKanban size={18} /> },
     { to: "/tasks", label: "Tasks", icon: <CheckSquare size={18} /> },
     { to: "/team", label: "Team", icon: <Users size={18} /> },
-    { to: "/reports", label: "Reports", icon: <BarChart2 size={18} /> },
+    { to: "/Setting", label: "Setting", icon: <BarChart2 size={18} /> },
   ];
 
   return (
