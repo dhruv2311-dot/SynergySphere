@@ -1,10 +1,211 @@
 import React, { useState } from "react";
 
+function CreateTask({ onClose, onCreate }) {
+  const [taskName, setTaskName] = useState("");
+  const [assignee, setAssignee] = useState("");
+  const [project, setProject] = useState("");
+  const [tags, setTags] = useState(["Design", "Frontend", "Urgent"]);
+  const [tagInput, setTagInput] = useState("");
+  const [priority, setPriority] = useState("");
+  const [image, setImage] = useState(null);
+  const [description, setDescription] = useState("");
+
+  const handleAddTag = (e) => {
+    if (e.key === "Enter" && tagInput.trim()) {
+      setTags([...tags, tagInput.trim()]);
+      setTagInput("");
+    }
+  };
+
+  const handleRemoveTag = (tag) => {
+    setTags(tags.filter((t) => t !== tag));
+  };
+
+  const handleImageUpload = (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newTask = {
+      id: Date.now(),
+      title: taskName,
+      due: "Dec 25", // default due date, can be extended
+      priority,
+      blocked: false,
+    };
+    onCreate(newTask); // send task back to Project board
+    onClose();
+  };
+
+  return (
+    <div className="fixed inset-0 flex items-center justify-center z-50">
+      {/* overlay */}
+      <div
+        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+        onClick={onClose}
+      ></div>
+
+      {/* popup form */}
+      <form
+        onSubmit={handleSubmit}
+        className="relative w-[420px] bg-white shadow-lg rounded-2xl p-6 space-y-4 z-10"
+      >
+        <h2 className="text-2xl font-bold text-center">Create Task</h2>
+        <p className="text-center text-gray-500 text-sm">
+          Organize your work with <span className="font-semibold">SynergySphere</span>
+        </p>
+
+        {/* Task Name */}
+        <input
+          type="text"
+          placeholder="Enter task name..."
+          value={taskName}
+          onChange={(e) => setTaskName(e.target.value)}
+          className="w-full border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-purple-400"
+          required
+        />
+
+        {/* Assignee + Project */}
+        <div className="flex space-x-3">
+          <select
+            value={assignee}
+            onChange={(e) => setAssignee(e.target.value)}
+            className="flex-1 border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-purple-400"
+          >
+            <option value="">Select assignee...</option>
+            <option value="John">John</option>
+            <option value="Emma">Emma</option>
+            <option value="David">David</option>
+          </select>
+
+          <select
+            value={project}
+            onChange={(e) => setProject(e.target.value)}
+            className="flex-1 border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-purple-400"
+          >
+            <option value="">Select project...</option>
+            <option value="Website">Website</option>
+            <option value="Mobile App">Mobile App</option>
+            <option value="Dashboard">Dashboard</option>
+          </select>
+        </div>
+
+        {/* Tags */}
+        <div>
+          <div className="flex flex-wrap gap-2 mb-2">
+            {tags.map((tag, i) => (
+              <span
+                key={i}
+                className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full flex items-center space-x-2 text-sm"
+              >
+                {tag}
+                <button
+                  type="button"
+                  onClick={() => handleRemoveTag(tag)}
+                  className="ml-2 text-gray-500 hover:text-red-500"
+                >
+                  ✕
+                </button>
+              </span>
+            ))}
+          </div>
+          <input
+            type="text"
+            placeholder="Add tags..."
+            value={tagInput}
+            onChange={(e) => setTagInput(e.target.value)}
+            onKeyDown={handleAddTag}
+            className="w-full border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-purple-400"
+          />
+        </div>
+
+        {/* Priority */}
+        <div className="space-y-2">
+          <p className="text-sm font-medium">Priority</p>
+          <div className="flex space-x-4">
+            {["Low", "Medium", "High"].map((level) => (
+              <label
+                key={level}
+                className={`flex items-center space-x-2 cursor-pointer ${
+                  priority === level ? "font-semibold" : ""
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="priority"
+                  value={level}
+                  checked={priority === level}
+                  onChange={(e) => setPriority(e.target.value)}
+                />
+                <span
+                  className={`w-3 h-3 rounded-full ${
+                    level === "Low"
+                      ? "bg-green-500"
+                      : level === "Medium"
+                      ? "bg-blue-500"
+                      : "bg-red-500"
+                  }`}
+                ></span>
+                <span>{level}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        {/* Upload Image */}
+        <div className="border-2 border-dashed rounded-lg p-4 text-center">
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            className="hidden"
+            id="fileUpload"
+          />
+          <label
+            htmlFor="fileUpload"
+            className="cursor-pointer text-gray-500 text-sm"
+          >
+            {image ? image.name : "Click to upload or drag and drop (PNG, JPG, up to 10MB)"}
+          </label>
+        </div>
+
+        {/* Description */}
+        <textarea
+          placeholder="Describe the task details..."
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className="w-full border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-purple-400"
+          rows="3"
+        />
+
+        {/* Buttons */}
+        <div className="flex justify-between items-center">
+          <button
+            type="button"
+            onClick={onClose}
+            className="px-5 py-2 rounded-lg border border-gray-300 hover:bg-gray-100"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className="px-6 py-2 rounded-lg text-white bg-gradient-to-r from-purple-500 to-blue-500 hover:opacity-90"
+          >
+            + Create Task
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
 export default function Project() {
   const [priorityFilter, setPriorityFilter] = useState("All Priorities");
-
-  // Dummy Tasks Data
-  const tasks = {
+  const [showModal, setShowModal] = useState(false);
+  const [tasks, setTasks] = useState({
     todo: [
       { id: 1, title: "Design Landing Page Mockups", due: "Dec 15", priority: "Low" },
       { id: 2, title: "User Research Analysis", due: "Dec 12", priority: "High", blocked: true },
@@ -20,12 +221,18 @@ export default function Project() {
       { id: 8, title: "Project Kickoff Meeting", due: "Dec 8", priority: "Medium", completed: true },
       { id: 9, title: "Requirements Gathering", due: "Dec 10", priority: "Low", completed: true },
     ],
-  };
+  });
 
-  // Filter function
   const filterTasks = (list) => {
     if (priorityFilter === "All Priorities") return list;
     return list.filter((task) => task.priority === priorityFilter);
+  };
+
+  const handleCreateTask = (newTask) => {
+    setTasks((prev) => ({
+      ...prev,
+      todo: [...prev.todo, newTask],
+    }));
   };
 
   return (
@@ -63,7 +270,10 @@ export default function Project() {
           </select>
 
           {/* Button */}
-          <button className="px-4 py-2 bg-indigo-600 text-white rounded-xl shadow-md hover:shadow-lg hover:bg-indigo-700">
+          <button
+            onClick={() => setShowModal(true)}
+            className="px-4 py-2 bg-indigo-600 text-white rounded-xl shadow-md hover:shadow-lg hover:bg-indigo-700"
+          >
             + New Task
           </button>
         </div>
@@ -185,6 +395,11 @@ export default function Project() {
           </div>
         </div>
       </div>
+
+      {/* Modal */}
+      {showModal && (
+        <CreateTask onClose={() => setShowModal(false)} onCreate={handleCreateTask} />
+      )}
     </div>
   );
 }
