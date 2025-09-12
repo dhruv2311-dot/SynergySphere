@@ -227,13 +227,161 @@ export default function Project() {
     if (priorityFilter === "All Priorities") return list;
     return list.filter((task) => task.priority === priorityFilter);
   };
+=======
+import { useState } from "react";
+import {
+  FiX,
+  FiUser,
+  FiCalendar,
+  FiFlag,
+  FiPaperclip,
+  FiSend,
+} from "react-icons/fi";
 
-  const handleCreateTask = (newTask) => {
-    setTasks((prev) => ({
-      ...prev,
-      todo: [...prev.todo, newTask],
-    }));
-  };
+export default function Dashboard() {
+  const projects = [
+    {
+      title: "Mobile App Redesign",
+      desc: "UI/UX overhaul for better user experience",
+      status: "On Track",
+      statusColor: "bg-blue-500",
+      progress: "70% Complete",
+      avatars: ["A", "B", "C"],
+      details: {
+        assignee: "Sarah Johnson",
+        dueDate: "Dec 25, 2025",
+        priority: "High",
+        description:
+          "Update the design system components to align with the new branding. This includes updating color palettes, typography, icons, and spacing tokens.",
+        subtasks: [
+          { text: "Update color tokens", done: true },
+          { text: "Revise typography scale", done: true },
+          { text: "Update button components", done: false },
+          { text: "Revise spacing tokens", done: false },
+          { text: "Update documentation", done: false },
+        ],
+        attachments: ["colors.pdf", "tokens.png", "components.docx"],
+        comments: [
+          { user: "Mike Chen", text: "Great progress so far!", time: "3h ago" },
+          {
+            user: "Sarah Johnson",
+            text: "Final tweaks remaining, should be done by tomorrow.",
+            time: "1h ago",
+          },
+        ],
+      },
+    },
+    {
+      title: "Backend Infrastructure",
+      desc: "Scalable cloud architecture implementation",
+      status: "At Risk",
+      statusColor: "bg-orange-500",
+      progress: "45% Complete",
+      avatars: ["D", "E", "F"],
+      details: {
+        assignee: "David Kim",
+        dueDate: "Jan 10, 2026",
+        priority: "Medium",
+        description: "Building cloud-native backend for scalability and performance.",
+        subtasks: [
+          { text: "Setup Kubernetes cluster", done: true },
+          { text: "Database migration", done: false },
+          { text: "API Gateway setup", done: false },
+        ],
+        attachments: ["infra-plan.pdf", "db-schema.png"],
+        comments: [
+          { user: "Alex Lee", text: "Migration blocked due to schema errors.", time: "2h ago" },
+        ],
+      },
+    },
+    {
+      title: "Marketing Campaign",
+      desc: "Q4 product launch marketing strategy",
+      status: "Blocked",
+      statusColor: "bg-red-500",
+      progress: "20% Complete",
+      avatars: ["G", "H", "I"],
+      details: {
+        assignee: "Emily Clark",
+        dueDate: "Nov 30, 2025",
+        priority: "High",
+        description: "Creating a multi-channel campaign to promote Q4 launch.",
+        subtasks: [
+          { text: "Social media creatives", done: false },
+          { text: "Ad placements", done: false },
+        ],
+        attachments: ["strategy.pdf"],
+        comments: [],
+      },
+    },
+    {
+      title: "AI Integration",
+      desc: "Integrating AI features in the product",
+      status: "On Track",
+      statusColor: "bg-blue-500",
+      progress: "60% Complete",
+      avatars: ["J", "K", "L"],
+      details: {
+        assignee: "Ryan Patel",
+        dueDate: "Feb 14, 2026",
+        priority: "High",
+        description: "Implementing AI-driven personalization features in the app.",
+        subtasks: [
+          { text: "Model training", done: true },
+          { text: "API integration", done: false },
+        ],
+        attachments: ["model-report.pdf", "ai-api.json"],
+        comments: [
+          { user: "Sophia Wong", text: "Model accuracy reached 92%", time: "1d ago" },
+        ],
+      },
+    },
+    {
+      title: "Data Migration",
+      desc: "Moving legacy data to new system",
+      status: "At Risk",
+      statusColor: "bg-orange-500",
+      progress: "35% Complete",
+      avatars: ["M", "N", "O"],
+      details: {
+        assignee: "Kevin Brown",
+        dueDate: "Mar 01, 2026",
+        priority: "Medium",
+        description: "Migrating old customer data into the new platform.",
+        subtasks: [
+          { text: "Data cleanup", done: false },
+          { text: "ETL pipeline setup", done: false },
+        ],
+        attachments: ["migration-plan.docx"],
+        comments: [
+          { user: "Mike Chen", text: "Cleanup taking longer than expected.", time: "6h ago" },
+        ],
+      },
+    },
+    {
+      title: "Customer Feedback Portal",
+      desc: "Building a new feedback management tool",
+      status: "On Track",
+      statusColor: "bg-blue-500",
+      progress: "50% Complete",
+      avatars: ["P", "Q", "R"],
+      details: {
+        assignee: "Anna White",
+        dueDate: "Dec 05, 2025",
+        priority: "Low",
+        description: "Developing an internal tool to collect and manage feedback.",
+        subtasks: [
+          { text: "Wireframe UI", done: true },
+          { text: "Build backend APIs", done: false },
+        ],
+        attachments: ["wireframes.pdf", "api-docs.txt"],
+        comments: [],
+      },
+    },
+  ];
+>>>>>>> 3e2e1a8633bff2857253c7d8ef11ead54f818e74
+
+  const [selectedProject, setSelectedProject] = useState(null);
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen pt-24">
