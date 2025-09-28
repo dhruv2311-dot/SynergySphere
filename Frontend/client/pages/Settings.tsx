@@ -1,12 +1,12 @@
-import Header from "@/components/Header";
-import Sidebar from "@/components/Sidebar";
-import ThemeToggle from "@/components/ThemeToggle";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
-import { Button } from "@/components/ui/button";
+import Header from "../components/Header";
+import Sidebar from "../components/Sidebar";
+import ThemeToggle from "../components/ThemeToggle";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
+import { Label } from "../components/ui/label";
+import { Switch } from "../components/ui/switch";
+import { Button } from "../components/ui/button";
 import { useState } from "react";
-import { useAuth } from "@/lib/store";
+import { useAuth } from "../lib/store";
 import { useNavigate } from "react-router-dom";
 
 export default function Settings() {

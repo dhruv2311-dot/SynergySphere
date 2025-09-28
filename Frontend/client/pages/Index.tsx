@@ -1,16 +1,16 @@
-import Header from "@/components/Header";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Sidebar from "@/components/Sidebar";
-import ProjectCard from "@/components/ProjectCard";
+import Header from "../components/Header";
+import { Button } from "../components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
+import { Input } from "../components/ui/input";
+import { Label } from "../components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
+import Sidebar from "../components/Sidebar";
+import ProjectCard from "../components/ProjectCard";
 import Footer from "../components/Footer";
-import AIInsightsCard from "@/components/AIInsightsCard";
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import AIInsightsCard from "../components/AIInsightsCard";
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../components/ui/chart";
 import { Bar, BarChart, CartesianGrid, Line, LineChart, Pie, PieChart, XAxis, YAxis } from "recharts";
-import { useAuth, useStore } from "@/lib/store";
+import { useAuth, useStore } from "../lib/store";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 

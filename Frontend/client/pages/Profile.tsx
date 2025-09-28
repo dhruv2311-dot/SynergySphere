@@ -1,13 +1,13 @@
-import Header from "@/components/Header";
-import Sidebar from "@/components/Sidebar";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { idToInitials, useAuth, useStore } from "@/lib/store";
+import Header from "../components/Header";
+import Sidebar from "../components/Sidebar";
+import { Button } from "../components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
+import { Input } from "../components/ui/input";
+import { Label } from "../components/ui/label";
+import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../components/ui/dialog";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select";
+import { idToInitials, useAuth, useStore } from "../lib/store";
 import { useRef, useState } from "react";
 
 export default function Profile() {
