@@ -1,10 +1,10 @@
 import { useMemo, useState } from "react";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "../components/ui/sheet";
+import { Button } from "../components/ui/button";
+import { Textarea } from "../components/ui/textarea";
 import { Sparkles } from "lucide-react";
-import { useStore } from "@/lib/store";
-import { summarizeNotifications } from "@/lib/ai";
+import { useStore } from "../lib/store";
+import { summarizeNotifications } from "../lib/ai";
 
 export default function AIAssistantDrawer() {
   const { state, selectors } = useStore();
