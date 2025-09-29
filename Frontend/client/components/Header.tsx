@@ -1,18 +1,18 @@
 import { useNavigate } from "react-router-dom";
-import { useAuth, idToInitials, useStore } from "@/lib/store";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { useAuth, idToInitials, useStore } from "../lib/store";
+import { Avatar, AvatarFallback } from "../components/ui/avatar";
 import { Bell, HelpCircle, MessageSquare, Users, ClipboardList, Plus, ListTodo, Search } from "lucide-react";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { Popover, PopoverContent, PopoverTrigger } from "../components/ui/popover";
+import { Tabs, TabsList, TabsTrigger } from "../components/ui/tabs";
+import { ScrollArea } from "../components/ui/scroll-area";
 import { useMemo, useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
-import ProjectCreateDialog from "@/components/ProjectCreateDialog";
-import TaskCreateDialog from "@/components/TaskCreateDialog";
-import InviteDialog from "@/components/InviteDialog";
-import AIAssistantDrawer from "@/components/AIAssistantDrawer";
-import { summarizeNotifications } from "@/lib/ai";
+import { Input } from "../components/ui/input";
+import { Dialog, DialogTrigger } from "../components/ui/dialog";
+import ProjectCreateDialog from "../components/ProjectCreateDialog";
+import TaskCreateDialog from "../components/TaskCreateDialog";
+import InviteDialog from "../components/InviteDialog";
+import AIAssistantDrawer from "../components/AIAssistantDrawer";
+import { summarizeNotifications } from "../lib/ai";
 
 export default function Header() {
   const { user } = useAuth();

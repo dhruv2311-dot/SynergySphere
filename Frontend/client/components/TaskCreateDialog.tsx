@@ -1,16 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
-import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Badge } from "@/components/ui/badge";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { cn } from "@/lib/utils";
-import { useStore } from "@/lib/store";
+import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogClose } from "../components/ui/dialog";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Label } from "../components/ui/label";
+import { Textarea } from "../components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select";
+import { Badge } from "../components/ui/badge";
+import { RadioGroup, RadioGroupItem } from "../components/ui/radio-group";
+import { cn } from "../lib/utils";
+import { useStore } from "../lib/store";
 import { Folder, Tag as TagIcon, User, Flag, CloudUpload, Plus, Sparkles } from "lucide-react";
-import { generateTaskFromBrief } from "@/lib/ai";
+import { generateTaskFromBrief } from "../lib/ai";
 
 export default function TaskCreateDialog({ initialProjectId, onCreated }: { initialProjectId?: string; onCreated: () => void }) {
   const { state, selectors, dispatch } = useStore();
