@@ -1,4 +1,4 @@
-import { State, Task, Project } from "@/lib/store";
+import { State, Task, Project } from "../lib/store";
 
 export type ProjectDraft = {
   name?: string;

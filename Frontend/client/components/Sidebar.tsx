@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
-import { cn } from "@/lib/utils";
-import ThemeToggle from "@/components/ThemeToggle";
+import { cn } from "../lib/utils";
+import ThemeToggle from "../components/ThemeToggle";
 import { Home, FolderKanban, ListTodo, Users, BarChart3, Settings as Gear } from "lucide-react";
 
 const items = [

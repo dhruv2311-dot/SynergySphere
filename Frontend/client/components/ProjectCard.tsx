@@ -1,8 +1,8 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { idToInitials, Task, TaskStatus, User } from "@/lib/store";
+import { Card, CardContent } from "../components/ui/card";
+import { Avatar, AvatarFallback } from "../components/ui/avatar";
+import { Button } from "../components/ui/button";
+import { Progress } from "../components/ui/progress";
+import { idToInitials, Task, TaskStatus, User } from "../lib/store";
 
 export default function ProjectCard({
   name,

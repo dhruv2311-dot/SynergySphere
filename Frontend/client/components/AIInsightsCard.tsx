@@ -1,6 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { useMemo } from "react";
-import { useStore } from "@/lib/store";
+import { useStore } from "../lib/store";
 
 export default function AIInsightsCard() {
   const { state, selectors } = useStore();

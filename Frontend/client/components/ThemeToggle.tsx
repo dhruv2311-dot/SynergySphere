@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Switch } from "@/components/ui/switch";
+import { Switch } from "../components/ui/switch";
 
 export default function ThemeToggle() {
   const [isDark, setIsDark] = useState(false);
