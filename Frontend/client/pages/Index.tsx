@@ -3,11 +3,11 @@ import { Button } from "../components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
 import Sidebar from "../components/Sidebar";
 import ProjectCard from "../components/ProjectCard";
 import Footer from "../components/Footer";
 import AIInsightsCard from "../components/AIInsightsCard";
+import CreateAccount from "../components/CreateAccount";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../components/ui/chart";
 import { Bar, BarChart, CartesianGrid, Line, LineChart, Pie, PieChart, XAxis, YAxis } from "recharts";
 import { useAuth, useStore } from "../lib/store";
@@ -15,22 +15,11 @@ import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Index() {
-  const { user, login, register } = useAuth();
-  const { selectors, dispatch } = useStore();
+  const { user, register } = useAuth();
+  const { selectors } = useStore();
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
-  const [values, setValues] = useState({ name: "", email: "", password: "" });
   const projects = useMemo(() => (user ? selectors.userProjects(user.id) : []), [selectors, user]);
-
-  const onSubmitAuth = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (isLogin) {
-      login(values.email, values.password);
-    } else {
-      register(values.name || values.email.split("@")[0], values.email, values.password);
-    }
-  };
-
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
@@ -53,34 +42,14 @@ export default function Index() {
               </ul>
             </div>
             <Card className="backdrop-blur">
-              <CardHeader>
-                <CardTitle>{isLogin ? "Login" : "Create your account"}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form className="grid gap-4" onSubmit={onSubmitAuth}>
-                  {!isLogin && (
-                    <div className="grid gap-2">
-                      <Label htmlFor="name">Name</Label>
-                      <Input id="name" value={values.name} onChange={(e) => setValues({ ...values, name: e.target.value })} required={!isLogin} placeholder="Taylor Jenkins" />
-                    </div>
-                  )}
-                  <div className="grid gap-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input id="email" type="email" value={values.email} onChange={(e) => setValues({ ...values, email: e.target.value })} required placeholder="you@company.com" />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="password">Password</Label>
-                    <Input id="password" type="password" value={values.password} onChange={(e) => setValues({ ...values, password: e.target.value })} required placeholder="••••••••" />
-                  </div>
-                  <Button type="submit" className="w-full">{isLogin ? "Sign in" : "Create account"}</Button>
-                </form>
-                <div className="mt-3 flex items-center justify-between text-sm">
-                  <button className="text-primary underline underline-offset-4" onClick={() => setIsLogin((v) => !v)}>
-                    {isLogin ? "Need an account? Sign up" : "Already have an account? Sign in"}
-                  </button>
-                  <button className="text-muted-foreground hover:text-foreground">Forgot password?</button>
-                </div>
-              </CardContent>
+              {isLogin ? (
+                <Login onSwitchToRegister={() => setIsLogin(false)} />
+              ) : (
+                <CreateAccount
+                  onRegister={register}
+                  onSwitchToLogin={() => setIsLogin(true)}
+                />
+              )}
             </Card>
           </div>
         )}
@@ -167,6 +136,44 @@ export default function Index() {
       </main>
       <Footer />
     </div>
+  );
+}
+
+// You can also move this Login component to its own file (`Login.tsx`) for consistency
+function Login({ onSwitchToRegister }: { onSwitchToRegister: () => void }) {
+  const { login } = useAuth();
+  const [values, setValues] = useState({ email: "", password: "" });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    login(values.email, values.password);
+  };
+
+  return (
+    <>
+      <CardHeader>
+        <CardTitle>Login</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <form className="grid gap-4" onSubmit={handleSubmit}>
+          <div className="grid gap-2">
+            <Label htmlFor="email">Email</Label>
+            <Input id="email" type="email" value={values.email} onChange={(e) => setValues({ ...values, email: e.target.value })} required placeholder="you@company.com" />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="password">Password</Label>
+            <Input id="password" type="password" value={values.password} onChange={(e) => setValues({ ...values, password: e.target.value })} required placeholder="••••••••" />
+          </div>
+          <Button type="submit" className="w-full">Sign in</Button>
+        </form>
+        <div className="mt-3 flex items-center justify-between text-sm">
+          <button className="text-primary underline underline-offset-4" onClick={onSwitchToRegister}>
+            Need an account? Sign up
+          </button>
+          <button className="text-muted-foreground hover:text-foreground">Forgot password?</button>
+        </div>
+      </CardContent>
+    </>
   );
 }
 
